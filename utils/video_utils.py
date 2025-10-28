@@ -7,8 +7,10 @@ def save_temp_video(uploaded_file):
         temp_file.write(uploaded_file.read())
         return temp_file.name
 
-def get_frame_count(video_path):
+def get_video_info(video_path):
     cap = cv2.VideoCapture(video_path)
-    count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    duration = frame_count / fps
     cap.release()
-    return count
+    return frame_count, fps, duration
