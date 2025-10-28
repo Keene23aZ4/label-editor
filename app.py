@@ -6,10 +6,8 @@ from utils.video_utils import save_temp_video, get_video_info
 st.set_page_config(page_title="ラベル編集ツール", layout="wide")
 st.title("🎿 スキー動画ラベル編集ツール")
 
-# ラベル保存先ファイル
 LABEL_FILE = "label_data.json"
 
-# 動画アップロード
 uploaded_file = st.file_uploader("動画をアップロード", type=["mp4"])
 if uploaded_file:
     video_path = save_temp_video(uploaded_file)
@@ -17,10 +15,9 @@ if uploaded_file:
     video_name = uploaded_file.name
 
     st.video(uploaded_file)
-    st.markdown(f"**動画情報**: {frame_count}フレーム / {fps:.2f} fps / {duration:.2f} 秒")
+    st.markdown(f"**動画情報**: {frame_count}フレーム / {fps:.2f} fps / {duration:.1f} 秒")
 
-    # 区間指定（秒数ベース）
-    st.subheader("📝 ラベル区間の指定")
+    st.subheader("📝 ラベル区間の指定（0.1秒単位）")
     col1, col2 = st.columns(2)
     with col1:
         start_sec = st.slider("開始秒", 0.0, duration, 0.0, step=0.1)
