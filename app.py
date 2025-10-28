@@ -11,7 +11,10 @@ if uploaded_file:
     video_path = save_temp_video(uploaded_file)
     frame_count = get_frame_count(video_path)
     st.video(uploaded_file)
+    video_name = uploaded_file.name  # ✅ ここで定義
 
+
+    
     # 区間選択
     st.subheader("📝 ラベル区間の指定")
     start = st.number_input("開始フレーム", min_value=0, max_value=frame_count-1, value=0)
@@ -40,4 +43,5 @@ if uploaded_file:
     st.subheader("📋 現在のラベル区間")
     if video_name in label_data:
         for entry in label_data[video_name]:
+
             st.write(f"{entry['start']}〜{entry['end']} : {entry['label']}")
